@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Datas Profissional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Calculadora de Datas</h1>
+            <p>Bom trabalho, mãe! ❤️</p>
+            <div class="audit-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="auditModeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span>Modo Auditoria</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- MÓDULO A: Diferença entre duas datas -->
+            <section class="card" id="moduleA">
+                <h2>(A) Diferença entre Datas</h2>
+                <div class="form-group">
+                    <label for="startDate">Data Inicial (DD/MM/AAAA)</label>
+                    <input type="text" id="startDate" placeholder="DD/MM/AAAA" maxlength="10">
+                    <span class="error-msg" id="err-startDate"></span>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Data Final (DD/MM/AAAA)</label>
+                    <input type="text" id="endDate" placeholder="DD/MM/AAAA" maxlength="10">
+                    <span class="error-msg" id="err-endDate"></span>
+                </div>
+                <div class="actions">
+                    <button id="btnCalcDiff" disabled>Calcular Período</button>
+                </div>
+                <div class="result-box" id="resultA" style="display: none;">
+                    <h3>Resultado:</h3>
+                    <p class="period-text"><span id="outYears">0</span> anos, <span id="outMonths">0</span> meses, <span id="outDays">0</span> dias</p>
+                    <p class="total-days">Total de dias: <strong id="outTotalDays">0</strong></p>
+                    <small>“Total de dias calculado por contagem inclusiva (inclui o dia inicial e o dia final).”</small>
+                    <br>
+                    <button class="secondary-btn" id="btnCopyPeriod">Usar este período no Módulo B</button>
+                </div>
+            </section>
+
+            <!-- MÓDULO B: Adicionar período -->
+            <section class="card" id="moduleB">
+                <h2>(B) Adicionar Período</h2>
+                <div class="form-group">
+                    <label for="baseDate">Data Base (DD/MM/AAAA)</label>
+                    <input type="text" id="baseDate" placeholder="DD/MM/AAAA" maxlength="10">
+                    <span class="error-msg" id="err-baseDate"></span>
+                </div>
+                <div class="grid-inputs">
+                    <div class="form-group">
+                        <label for="addYears">Anos</label>
+                        <input type="number" id="addYears" min="0" value="0">
+                        <span class="error-msg" id="err-addYears"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="addMonths">Meses (0-11)</label>
+                        <input type="number" id="addMonths" min="0" max="11" value="0">
+                        <span class="error-msg" id="err-addMonths"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="addDays">Dias (0-31)</label>
+                        <input type="number" id="addDays" min="0" max="31" value="0">
+                        <span class="error-msg" id="err-addDays"></span>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="btnCalcAdd" disabled>Calcular Nova Data</button>
+                </div>
+                <div class="result-box" id="resultB" style="display: none;">
+                    <h3>Nova Data:</h3>
+                    <p class="final-date" id="outNewDate">--/--/----</p>
+                </div>
+            </section>
+        </main>
+
+        <aside id="auditSection" class="card audit-card" style="display: none;">
+            <h2>Registo de Auditoria</h2>
+            <div id="auditLogs"></div>
+        </aside>
+
+        <footer>
+            <p>&copy; 2024 Ferramenta de Cálculo Off-line. Segurança e Privacidade Garantidas.</p>
+        </footer>
+    </div>
+
+    <script src="app.js?v=final"></script>
+</body>
+</html>
