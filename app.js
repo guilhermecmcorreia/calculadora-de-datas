@@ -4,13 +4,36 @@
  */
 
 // --- SEGURANÇA: NETWORK KILL-SWITCH ---
+// --- SEGURANÇA: NETWORK KILL-SWITCH & PRIVACY SHIELD ---
 (function() {
-    const disableNetwork = () => { throw new Error("Network disabled by design"); };
-    window.fetch = disableNetwork;
-    window.XMLHttpRequest = disableNetwork;
-    if (window.WebSocket) window.WebSocket = disableNetwork;
-    if (window.EventSource) window.EventSource = disableNetwork;
-    console.log("🔒 Segurança: Funcionamento 100% offline garantido.");
+    const kill = () => { throw new Error("Security Violation: Action Denied (Offline Mode)"); };
+
+    // 1. Bloqueio Total de Rede (Interface nível JS)
+    window.fetch = kill;
+    window.XMLHttpRequest = kill;
+    if (window.WebSocket) window.WebSocket = kill;
+    if (window.EventSource) window.EventSource = kill;
+    if (navigator.sendBeacon) navigator.sendBeacon = kill;
+
+    // 2. Proteção de Dados: Desativar Persistência (Prevenção de Exfiltração via Cache/Extensões)
+    const deadStorage = { 
+        getItem: () => null, setItem: kill, removeItem: kill, 
+        clear: kill, length: 0, key: () => null 
+    };
+    
+    try {
+        Object.defineProperty(window, 'localStorage', { value: deadStorage, writable: false });
+        Object.defineProperty(window, 'sessionStorage', { value: deadStorage, writable: false });
+        Object.defineProperty(document, 'cookie', { 
+            get: () => "", 
+            set: kill,
+            configurable: false 
+        });
+    } catch (e) {
+        console.warn("Segurança: Alguns bloqueios de storage podem ser limitados pelo navegador.");
+    }
+
+    console.log("🔒 Segurança: Funcionamento 100% offline e privado garantido.");
 })();
 
 // --- AJUDANTES DE CALENDÁRIO (GREGORIANO) ---

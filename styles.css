@@ -94,7 +94,7 @@ header {
 }
 
 .subtitle {
-    font-family: 'Outfit', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     font-weight: 500;
     font-size: 1.25rem;
     color: var(--text-muted);
@@ -143,7 +143,7 @@ header {
 }
 
 h2 {
-    font-family: 'Outfit', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     font-weight: 700;
     font-size: 1.75rem;
     letter-spacing: -0.02em;
@@ -202,7 +202,7 @@ input:focus-visible {
     padding: 1.125rem;
     border: none;
     border-radius: var(--radius-md);
-    font-family: 'Outfit', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     font-weight: 700;
     font-size: 1.125rem;
     cursor: pointer;
@@ -378,7 +378,7 @@ input:focus-visible {
 }
 
 .result-title {
-    font-family: 'Outfit', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -403,7 +403,7 @@ input:focus-visible {
 }
 
 .final-date-display {
-    font-family: 'Outfit', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     font-size: 4rem;
     font-weight: 800;
     color: var(--success);
@@ -449,7 +449,7 @@ input:focus-visible {
 }
 
 .audit-body {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: 'Consolas', 'Monaco', 'Cascadia Code', 'Ubuntu Mono', monospace;
     font-size: 0.875rem;
     color: #fcd34d;
     max-height: 400px;
