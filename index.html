@@ -4,94 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Datas Profissional</title>
+    <!-- Fontes do Sistema (Zero Rede) -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Calculadora de Datas</h1>
-            <p>Bom trabalho, mãe! ❤️</p>
-            <div class="audit-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="auditModeToggle">
-                    <span class="slider round"></span>
+            <h1 class="premium-title">Calculadora de Datas</h1>
+            <p class="subtitle">Bom trabalho, mãe! ❤️</p>
+            
+            <div class="header-controls">
+                <label class="audit-toggle" for="auditModeToggle" title="Ativar registo detalhado do cálculo">
+                    <div class="switch">
+                        <input type="checkbox" id="auditModeToggle">
+                        <span class="slider round"></span>
+                    </div>
+                    <span>Modo Auditoria</span>
                 </label>
-                <span>Modo Auditoria</span>
             </div>
         </header>
 
         <main>
             <!-- MÓDULO A: Diferença entre duas datas -->
-            <section class="card" id="moduleA">
-                <h2>(A) Diferença entre Datas</h2>
-                <div class="form-group">
-                    <label for="startDate">Data Inicial (DD/MM/AAAA)</label>
-                    <input type="text" id="startDate" placeholder="DD/MM/AAAA" maxlength="10">
-                    <span class="error-msg" id="err-startDate"></span>
+            <section class="card module-section" id="moduleA">
+                <div class="card-header">
+                    <span class="module-badge">A</span>
+                    <h2>Diferença entre Datas</h2>
                 </div>
-                <div class="form-group">
-                    <label for="endDate">Data Final (DD/MM/AAAA)</label>
-                    <input type="text" id="endDate" placeholder="DD/MM/AAAA" maxlength="10">
-                    <span class="error-msg" id="err-endDate"></span>
+                
+                <div class="grid-layout">
+                    <div class="form-group">
+                        <label for="startDate">Data Inicial</label>
+                        <input type="text" id="startDate" 
+                               placeholder="DD/MM/AAAA" 
+                               maxlength="10" 
+                               inputmode="numeric" 
+                               autocomplete="off" 
+                               pattern="\d{2}/\d{2}/\d{4}">
+                        <span class="input-hint">Ex: 01/01/2026</span>
+                        <span class="error-msg" id="err-startDate" aria-live="polite"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">Data Final</label>
+                        <input type="text" id="endDate" 
+                               placeholder="DD/MM/AAAA" 
+                               maxlength="10" 
+                               inputmode="numeric" 
+                               autocomplete="off" 
+                               pattern="\d{2}/\d{2}/\d{4}">
+                        <span class="input-hint">Ex: 31/12/2026</span>
+                        <span class="error-msg" id="err-endDate" aria-live="polite"></span>
+                    </div>
                 </div>
+
                 <div class="actions">
-                    <button id="btnCalcDiff" disabled>Calcular Período</button>
+                    <button id="btnCalcDiff" class="btn btn-primary" disabled>Calcular Período</button>
                 </div>
-                <div class="result-box" id="resultA" style="display: none;">
-                    <h3>Resultado:</h3>
-                    <p class="period-text"><span id="outYears">0</span> anos, <span id="outMonths">0</span> meses, <span id="outDays">0</span> dias</p>
-                    <p class="total-days">Total de dias: <strong id="outTotalDays">0</strong></p>
-                    <small>“Total de dias calculado por contagem inclusiva (inclui o dia inicial e o dia final).”</small>
-                    <br>
-                    <button class="secondary-btn" id="btnCopyPeriod">Usar este período no Módulo B</button>
+
+                <div class="result-box" id="resultA" style="display: none;" aria-live="polite">
+                    <header class="result-header">
+                        <h3 class="result-title">Tempo Decorrido <small>(Exclusive)</small></h3>
+                        <p class="result-subtitle">Diferença exata entre as duas datas</p>
+                    </header>
+                    
+                    <div class="period-grid">
+                        <div class="period-item">
+                            <span class="period-value" id="outYears">0</span>
+                            <span class="period-label">anos</span>
+                        </div>
+                        <div class="period-item">
+                            <span class="period-value" id="outMonths">0</span>
+                            <span class="period-label">meses</span>
+                        </div>
+                        <div class="period-item">
+                            <span class="period-value" id="outDays">0</span>
+                            <span class="period-label">dias</span>
+                        </div>
+                    </div>
+
+                    <div class="result-footer">
+                        <div class="secondary-metrics">
+                            <p class="total-label">Contagem Inclusiva <small>(Inclui dia inicial e final)</small></p>
+                            <p class="total-days-hint">Duração Total: <strong id="outTotalDays">0</strong> dias</p>
+                        </div>
+                        
+                        <button class="btn btn-cta" id="btnCopyPeriod">
+                            <span>Usar este período no Módulo B</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M16 1l-15 15h9v9l15-15h-9z"></path></svg>
+                        </button>
+                    </div>
                 </div>
             </section>
 
             <!-- MÓDULO B: Adicionar período -->
-            <section class="card" id="moduleB">
-                <h2>(B) Adicionar Período</h2>
-                <div class="form-group">
-                    <label for="baseDate">Data Base (DD/MM/AAAA)</label>
-                    <input type="text" id="baseDate" placeholder="DD/MM/AAAA" maxlength="10">
-                    <span class="error-msg" id="err-baseDate"></span>
+            <section class="card module-section" id="moduleB">
+                <div class="card-header">
+                    <span class="module-badge">B</span>
+                    <h2>Adicionar Período</h2>
                 </div>
-                <div class="grid-inputs">
+
+                <div class="form-group">
+                    <label for="baseDate">Data Base</label>
+                    <input type="text" id="baseDate" 
+                           placeholder="DD/MM/AAAA" 
+                           maxlength="10" 
+                           inputmode="numeric" 
+                           autocomplete="off" 
+                           pattern="\d{2}/\d{2}/\d{4}">
+                    <span class="error-msg" id="err-baseDate" aria-live="polite"></span>
+                </div>
+
+                <div class="grid-inputs-wrapper">
                     <div class="form-group">
                         <label for="addYears">Anos</label>
                         <input type="number" id="addYears" min="0" value="0">
-                        <span class="error-msg" id="err-addYears"></span>
+                        <span class="error-msg" id="err-addYears" aria-live="polite"></span>
                     </div>
                     <div class="form-group">
-                        <label for="addMonths">Meses (0-11)</label>
+                        <label for="addMonths">Meses</label>
                         <input type="number" id="addMonths" min="0" max="11" value="0">
-                        <span class="error-msg" id="err-addMonths"></span>
+                        <span class="error-msg" id="err-addMonths" aria-live="polite"></span>
                     </div>
                     <div class="form-group">
-                        <label for="addDays">Dias (0-31)</label>
+                        <label for="addDays">Dias</label>
                         <input type="number" id="addDays" min="0" max="31" value="0">
-                        <span class="error-msg" id="err-addDays"></span>
+                        <span class="error-msg" id="err-addDays" aria-live="polite"></span>
                     </div>
                 </div>
+
                 <div class="actions">
-                    <button id="btnCalcAdd" disabled>Calcular Nova Data</button>
+                    <button id="btnCalcAdd" class="btn btn-primary" disabled>Calcular Nova Data</button>
                 </div>
-                <div class="result-box" id="resultB" style="display: none;">
-                    <h3>Nova Data:</h3>
-                    <p class="final-date" id="outNewDate">--/--/----</p>
+
+                <div class="result-box spotlight" id="resultB" style="display: none;" aria-live="polite">
+                    <h3 class="result-title">Nova Data Calculada:</h3>
+                    <p class="final-date-display" id="outNewDate">--/--/----</p>
                 </div>
             </section>
         </main>
 
         <aside id="auditSection" class="card audit-card" style="display: none;">
-            <h2>Registo de Auditoria</h2>
-            <div id="auditLogs"></div>
+            <div class="audit-header">
+                <h2>Registo de Auditoria</h2>
+                <button id="btnClearAudit" class="btn btn-small">Limpar</button>
+            </div>
+            <div id="auditLogs" class="audit-body" aria-live="polite"></div>
         </aside>
 
         <footer>
-            <p>&copy; 2024 Ferramenta de Cálculo Off-line. Segurança e Privacidade Garantidas.</p>
+            <div class="footer-content">
+                <p>&copy; 2026 Ferramenta Offline Profissional</p>
+                <div class="security-badges">
+                    <span class="badge-offline">Offline</span>
+                    <span class="badge-secure">Privacidade Total</span>
+                </div>
+            </div>
         </footer>
     </div>
 
-    <script src="app.js?v=final"></script>
+    <!-- Script consolidado para app.js -->
+    <script src="app.js"></script>
 </body>
 </html>
